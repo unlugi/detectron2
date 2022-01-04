@@ -62,7 +62,7 @@ OUTPUT_PATH="$COPYDIR/output"
 # cd somewhere where your code is.
 cd /SAN/medic/recons3d/projects/detectron2/projects/DensePose
 
-dtn2/bin/python3 train_net.py --config-file configs/densepose_rcnn_R_50_FPN_s1x_legacy.yaml \
+dtn2/bin/python3 train_net.py --config-file configs/scripts/densepose_rcnn_R_50_FPN_s1x_legacy.yaml \
                                                       MODEL.KEYPOINT_ON True \
                                                       SOLVER.IMS_PER_BATCH 4 \
                                                       SOLVER.BASE_LR 0.001 \

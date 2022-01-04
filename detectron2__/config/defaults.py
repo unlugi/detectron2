@@ -86,6 +86,20 @@ _C.INPUT.FORMAT = "BGR"
 # Mask R-CNN supports either "polygon" or "bitmask" as ground truth.
 _C.INPUT.MASK_FORMAT = "polygon"  # alternative: "bitmask"
 
+# Whether the input is .svg or regular raster image
+# This part is for doing augmentations on the input sketches
+# My modifications - gizem
+_C.INPUT.SVG = CN()
+# Whether to load .svg files
+_C.INPUT.SVG.LOAD_SVG = False
+# Whether to do svg augmentations on images
+_C.INPUT.SVG.AUG = False
+# Probabilities for disappearing body parts
+_C.INPUT.SVG.AUG_PROB_JOINTS = 0.4
+_C.INPUT.SVG.AUG_PROB_LIMBS_OCC = 0.2
+_C.INPUT.SVG.AUG_PROB_LIMBS_VIS = 0.7
+_C.INPUT.SVG.AUG_PROB_TORSO_OCC = 0.2
+_C.INPUT.SVG.AUG_PROB_TORSO_VIS = 0.7
 
 # -----------------------------------------------------------------------------
 # Dataset
