@@ -14,6 +14,10 @@ from detectron2.utils.file_io import PathManager
 
 from ..utils import maybe_prepend_base_path
 
+from detectron2.data.datasets.builtin_meta import COCO_PERSON_KEYPOINT_NAMES, \
+                                                  KEYPOINT_CONNECTION_RULES, \
+                                                  COCO_PERSON_KEYPOINT_FLIP_MAP
+
 DENSEPOSE_MASK_KEY = "dp_masks"
 DENSEPOSE_IUV_KEYS_WITHOUT_MASK = ["dp_x", "dp_y", "dp_I", "dp_U", "dp_V"]
 DENSEPOSE_CSE_KEYS_WITHOUT_MASK = ["dp_x", "dp_y", "dp_vertex", "ref_model"]
@@ -50,6 +54,16 @@ DATASETS = [
         name="densepose_coco_2014_valminusminival",
         images_root="coco/val2014",
         annotations_fpath="coco/annotations/densepose_valminusminival2014.json",
+    ),
+    CocoDatasetInfo(
+        name="densepose_coco_2014_testreal_g",
+        images_root="coco/testGizem",
+        annotations_fpath="coco/annotations/densepose_gizem2014.json",
+    ),
+    CocoDatasetInfo(
+        name="densepose_coco_2014_testreal_m",
+        images_root="coco/testMo",
+        annotations_fpath="coco/annotations/densepose_mo2014.json",
     ),
     CocoDatasetInfo(
         name="densepose_coco_2014_train_cse",
@@ -143,10 +157,10 @@ def get_metadata(base_path: Optional[str]) -> Dict[str, Any]:
     meta = {
         "densepose_transform_src": maybe_prepend_base_path(base_path, "UV_symmetry_transforms.mat"),
         "densepose_smpl_subdiv": maybe_prepend_base_path(base_path, "SMPL_subdiv.mat"),
-        "densepose_smpl_subdiv_transform": maybe_prepend_base_path(
-            base_path,
-            "SMPL_SUBDIV_TRANSFORM.mat",
-        ),
+        "densepose_smpl_subdiv_transform": maybe_prepend_base_path(base_path,"SMPL_SUBDIV_TRANSFORM.mat" ),
+	"keypoint_names": COCO_PERSON_KEYPOINT_NAMES,
+        "keypoint_flip_map": COCO_PERSON_KEYPOINT_FLIP_MAP,
+        "keypoint_connection_rules": KEYPOINT_CONNECTION_RULES,
     }
     return meta
 

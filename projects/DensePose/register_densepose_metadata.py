@@ -1,4 +1,5 @@
 from detectron2.data import MetadataCatalog
+from detectron2.data.datasets import register_coco_instances
 
 COCO_PERSON_KEYPOINT_NAMES = (
     "nose",
@@ -46,7 +47,14 @@ KEYPOINT_CONNECTION_RULES = [
     ("right_knee", "right_ankle", (255, 195, 77)),
 ]
 
+# Register real test datasets for sketch
+register_coco_instances("densepose_coco_2014_testreal_g", {},
+                        "datasets/coco/annotations/densepose_gizem2014.json", "datasets/coco/annotations/testGizem")
 
+register_coco_instances("densepose_coco_2014_testreal_m", {},
+                        "datasets/coco/annotations/densepose_mo2014.json", "datasets/coco/annotations/testMo")
+
+# Register additional metadata for densepose training
 MetadataCatalog.get("densepose_coco_2014_train").keypoint_names = COCO_PERSON_KEYPOINT_NAMES
 MetadataCatalog.get("densepose_coco_2014_train").keypoint_flip_map = COCO_PERSON_KEYPOINT_FLIP_MAP
 MetadataCatalog.get("densepose_coco_2014_train").keypoint_connection_rules = KEYPOINT_CONNECTION_RULES
@@ -62,3 +70,14 @@ MetadataCatalog.get("densepose_coco_2014_valminusminival").keypoint_connection_r
 MetadataCatalog.get("densepose_coco_2014_minival_100").keypoint_names = COCO_PERSON_KEYPOINT_NAMES
 MetadataCatalog.get("densepose_coco_2014_minival_100").keypoint_flip_map = COCO_PERSON_KEYPOINT_FLIP_MAP
 MetadataCatalog.get("densepose_coco_2014_minival_100").keypoint_connection_rules = KEYPOINT_CONNECTION_RULES
+
+MetadataCatalog.get("densepose_coco_2014_testreal_g").keypoint_names = COCO_PERSON_KEYPOINT_NAMES
+MetadataCatalog.get("densepose_coco_2014_testreal_g").keypoint_flip_map = COCO_PERSON_KEYPOINT_FLIP_MAP
+MetadataCatalog.get("densepose_coco_2014_testreal_g").keypoint_connection_rules = KEYPOINT_CONNECTION_RULES
+
+MetadataCatalog.get("densepose_coco_2014_testreal_m").keypoint_names = COCO_PERSON_KEYPOINT_NAMES
+MetadataCatalog.get("densepose_coco_2014_testreal_m").keypoint_flip_map = COCO_PERSON_KEYPOINT_FLIP_MAP
+MetadataCatalog.get("densepose_coco_2014_testreal_m").keypoint_connection_rules = KEYPOINT_CONNECTION_RULES
+
+
+print('Done')

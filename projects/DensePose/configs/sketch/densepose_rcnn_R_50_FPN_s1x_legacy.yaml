@@ -24,3 +24,6 @@ INPUT:
     AUG_PROB_LIMBS_VIS: 0.2
     AUG_PROB_TORSO_OCC: 0.7
     AUG_PROB_TORSO_VIS: 0.2
+DATASETS:
+  TRAIN: ("densepose_coco_2014_train", "densepose_coco_2014_valminusminival")
+  TEST: ("densepose_coco_2014_minival", "densepose_coco_2014_testreal_g", "densepose_coco_2014_testreal_m")

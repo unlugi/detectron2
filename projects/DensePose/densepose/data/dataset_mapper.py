@@ -13,7 +13,7 @@ from detectron2.layers import ROIAlign
 from detectron2.structures import BoxMode
 from detectron2.utils.file_io import PathManager
 
-from .structures import DensePoseDataRelative, DensePoseList, DensePoseTransformData
+from ..structures import DensePoseDataRelative, DensePoseList, DensePoseTransformData
 
 from cairosvg import svg2svg, svg2png
 import xml.etree.cElementTree as ET
@@ -282,9 +282,15 @@ class DatasetMapper:
         dataset_dict = copy.deepcopy(dataset_dict)  # it will be modified by code below
 
         # TODO: modifying this
+        #if self.load_svg: # load svg
+        #    image = self.svg_augment.augment(dataset_dict["file_name"][:-3] + 'svg')
+        #    image = utils.convert_PIL_to_numpy(image, self.img_format)
         if self.load_svg: # load svg
-            image = self.svg_augment.augment(dataset_dict["file_name"][:-3] + 'svg')
-            image = utils.convert_PIL_to_numpy(image, self.img_format)
+            if "testreal" in dataset_dict["dataset"]:  # TODO: Doing this to load real test sketches during eval-mode Correct this part???
+                image = utils.read_image(dataset_dict["file_name"], format=self.img_format)
+            else:
+                image = self.svg_augment.augment(dataset_dict["file_name"][:-3] + 'svg')
+                image = utils.convert_PIL_to_numpy(image, self.img_format)
         else: # load raster image
             image = utils.read_image(dataset_dict["file_name"], format=self.img_format)
 
